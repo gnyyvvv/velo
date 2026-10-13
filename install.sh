@@ -16,8 +16,9 @@ case $ARCH in
 esac
 
 VERSION="0.1"
-# ⭐ TO'G'RI USERNAME: gnyyvvv (3 ta y)
-URL="https://github.com/gnyyvvv/velo/raw/asosiy/Velo-${VERSION}-${ARCH_NAME}.AppImage"
+
+# ⭐ HEAD ishlatish — har qanday branch uchun ishlaydi
+URL="https://github.com/gnyyvvv/velo/raw/HEAD/Velo-${VERSION}-${ARCH_NAME}.AppImage"
 
 TMP_FILE="/tmp/Velo-${VERSION}-${ARCH_NAME}.AppImage"
 
@@ -26,6 +27,14 @@ if command -v curl >/dev/null 2>&1; then
     curl -sSL -o "$TMP_FILE" "$URL"
 else
     wget -q -O "$TMP_FILE" "$URL"
+fi
+
+# Tekshirish: AppImage bormi?
+if ! file "$TMP_FILE" | grep -q "ELF"; then
+    echo -e "${RED}Xato: AppImage yuklab olinmadi${NC}"
+    echo "Fayl HTML bo'lishi mumkin (404). Tekshiring: $URL"
+    rm -f "$TMP_FILE"
+    exit 1
 fi
 
 chmod +x "$TMP_FILE"
