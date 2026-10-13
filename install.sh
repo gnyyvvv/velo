@@ -17,7 +17,7 @@ esac
 
 VERSION="0.1"
 # ⭐ TO'G'RI USERNAME: gnyyvvv (3 ta y)
-URL="https://github.com/gnyyvvv/velo/raw/main/Velo-${VERSION}-${ARCH_NAME}.AppImage"
+URL="https://github.com/gnyyvvv/velo/raw/asosiy/Velo-${VERSION}-${ARCH_NAME}.AppImage"
 
 TMP_FILE="/tmp/Velo-${VERSION}-${ARCH_NAME}.AppImage"
 
