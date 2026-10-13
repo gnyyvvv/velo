@@ -1,340 +1,632 @@
+# ⚡ Velo Programming Language
 
-markdown
-# Velo Programming Language
+### Python-like syntax. C++-inspired performance.
 
-> 🐍 **Python-like syntax, ⚡ C++-like speed.**
+**Velo** is a modern, lightweight programming language designed to make coding simple, expressive, and efficient. It combines Python-inspired syntax with a custom bytecode compiler and the **Vertox Virtual Machine**.
 
-Velo is a modern, fast, and simple programming language. It combines the simplicity of Python with the performance of C++.
+<p align="center">
+  <img src="assets/velo-logo.png" alt="Velo Programming Language" width="180">
+</p>
 
-**Architecture:**
-Velo code (.vl)
-↓
-Lexer → Tokens
-↓
-Parser → AST
-↓
-Compiler → Bytecode
-↓
-Vertox VM → Result
+<p align="center">
+  <a href="https://github.com/gnyyvvv/velo"><img src="https://img.shields.io/github/stars/gnyyvvv/velo?style=for-the-badge&logo=github&color=7C83FD" alt="GitHub Stars"></a>
+  <a href="https://github.com/gnyyvvv/velo/blob/main/LICENSE"><img src="https://img.shields.io/github/license/gnyyvvv/velo?style=for-the-badge&color=blue" alt="License"></a>
+  <a href="https://github.com/gnyyvvv/velo"><img src="https://img.shields.io/badge/Language-C%2B%2B-00599C?style=for-the-badge&logo=cplusplus" alt="C++"></a>
+  <a href="https://github.com/gnyyvvv/velo"><img src="https://img.shields.io/badge/Version-0.1-orange?style=for-the-badge" alt="Version"></a>
+</p>
 
-text
-
----
-
-## ✨ Features
-
-- ✅ **Python-like syntax** — easy to learn, easy to write
-- ✅ **96+ built-in functions** — strings, lists, dicts, math
-- ✅ **Bytecode VM** (Vertox Engine) — fast execution
-- ✅ **Small and portable** — single binary, no dependencies
-- ✅ **Cross-platform** — Windows, Linux, macOS
-- ✅ **Open source** — Apache-2.0 license
+<p align="center">
+  <b>Simple to learn. Powerful to build. Designed to evolve.</b>
+</p>
 
 ---
 
-## 🚀 Quick Start
+## 📑 Table of Contents
 
-### Linux (universal installer)
+- [Overview](#-overview)
+- [Key Features](#-key-features)
+- [How Velo Works](#-how-velo-works)
+- [Installation](#-installation)
+- [Quick Start](#-quick-start)
+- [Language Examples](#-language-examples)
+- [Language Reference](#-language-reference)
+- [Built-in Functions](#-built-in-functions)
+- [String Methods](#-string-methods)
+- [List Methods](#-list-methods)
+- [Dictionary Methods](#-dictionary-methods)
+- [Project Structure](#-project-structure)
+- [Roadmap](#-roadmap)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Community](#-community)
+
+---
+
+## 🚀 Overview
+
+Velo is built for developers who want a clean programming experience without sacrificing control over execution.
+
+Unlike a simple line-by-line interpreter, Velo transforms source code into bytecode that runs on its own virtual machine, **Vertox Engine**.
+
+```text
+Readable syntax
+      ↓
+    Lexer
+      ↓
+    Tokens
+      ↓
+    Parser
+      ↓
+     AST
+      ↓
+   Compiler
+      ↓
+    Bytecode
+      ↓
+  Vertox VM
+      ↓
+    Result
+```
+
+The goal is to build an independent programming language and runtime that can grow into a portable, cross-platform development ecosystem.
+
+## ✨ Key Features
+
+| Feature | Description |
+|---|---|
+| 🐍 Python-inspired syntax | Readable, indentation-based code |
+| ⚙️ Custom compiler | Converts source code into bytecode |
+| ⚡ Vertox Engine | Stack-based virtual machine |
+| 🧩 Built-in data types | Integers, floats, strings, lists and dictionaries |
+| 🔄 Functions and recursion | Reusable functions and recursive calls |
+| 🧰 Rich built-ins | Utilities for strings, collections and mathematics |
+| 💻 Cross-platform goals | Windows, Linux and macOS |
+| 📦 Portable runtime goals | Designed with lightweight distribution in mind |
+| 🌍 Open source | Apache License 2.0 |
+
+> **Performance philosophy:** Velo uses a compiled-bytecode execution model. Native-code optimizations and performance improvements are part of its longer-term evolution; actual speed depends on the workload and implementation.
+
+---
+
+## ⚡ How Velo Works
+
+Velo consists of two main components.
+
+### 1. Vertox Engine
+
+The runtime responsible for executing Velo bytecode.
+
+- Stack-based virtual machine
+- Opcode instruction set
+- Runtime value representation
+- Scope and environment management
+- Bytecode execution
+
+### 2. Velo Compiler
+
+The language implementation that transforms `.vl` source files into executable bytecode.
+
+- **Lexer** — converts source text into tokens
+- **Parser** — builds an Abstract Syntax Tree (AST)
+- **Compiler** — translates the AST into bytecode
+- **Vertox VM** — executes the compiled instructions
+
+This separation allows Vertox to evolve as an independent runtime and potentially support additional frontends in the future.
+
+---
+
+## 📥 Installation
+
+### Linux — Universal Installer
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/gnyyvvv/velo/main/install.sh | bash
-Then:
+```
 
-bash
+Verify the installation:
+
+```bash
 velo --version
+```
+
+Run a program:
+
+```bash
 velo hello.vl
-Linux (AppImage)
-bash
+```
+
+**Security note:** For greater control, inspect `install.sh` before executing it with Bash.
+
+### Linux — AppImage
+
+Download the AppImage:
+
+```bash
 wget https://github.com/gnyyvvv/velo/raw/main/Velo-0.1-x86_64.AppImage
+```
+
+Make it executable and run it:
+
+```bash
 chmod +x Velo-0.1-x86_64.AppImage
 ./Velo-0.1-x86_64.AppImage hello.vl
-Build from source (Linux / macOS)
-bash
+```
+
+### Build from Source — Linux / macOS
+
+**Requirements:** A C++ compiler, CMake and Make.
+
+```bash
 git clone https://github.com/gnyyvvv/velo.git
 cd velo
-mkdir build && cd build
+
+mkdir build
+cd build
+
 cmake ..
 make
+
 ./velo --version
-Windows (from source)
-powershell
+```
+
+### Build from Source — Windows
+
+**Requirements:** Git, CMake, MinGW-w64 and `mingw32-make`.
+
+```bash
 git clone https://github.com/gnyyvvv/velo.git
 cd velo
-mkdir build && cd build
+
+mkdir build
+cd build
+
 cmake -G "MinGW Makefiles" ..
 mingw32-make
+
 .\velo.exe --version
-📖 Examples
-Hello World
-velo
+```
+
+---
+
+## 👋 Quick Start
+
+Create a file named `hello.vl`:
+
+```python
 print("Hello, World!")
-Fibonacci
-velo
+print("Welcome to Velo.")
+```
+
+Run it:
+
+```bash
+velo hello.vl
+```
+
+Expected output:
+
+```text
+Hello, World!
+Welcome to Velo.
+```
+
+---
+
+## 💻 Language Examples
+
+### Variables and Data Types
+
+```python
+name = "Velo"
+version = 0.1
+downloads = 1000
+is_ready = True
+nothing = None
+
+print(name)
+print(version)
+print(is_ready)
+```
+
+### Conditional Statements
+
+```python
+score = 85
+
+if score >= 90:
+    print("Excellent!")
+elif score >= 70:
+    print("Good job!")
+else:
+    print("Keep learning!")
+```
+
+### Loops
+
+```python
+for i in range(5):
+    print(i)
+
+counter = 0
+
+while counter < 3:
+    print(counter)
+    counter += 1
+```
+
+### Functions
+
+```python
+def greet(name, greeting="Hello"):
+    return greeting + ", " + name
+
+print(greet("Developer"))
+print(greet("Velo", "Welcome"))
+```
+
+### Fibonacci Sequence
+
+```python
 def fib(n):
     if n < 2:
         return n
+
     return fib(n - 1) + fib(n - 2)
 
 for i in range(10):
     print("fib(", i, ") =", fib(i))
-Strings
-velo
-name = "Ali Valiyev"
-print(name.upper())         # ALI VALIYEV
-print(name.lower())         # ali valiyev
-print(name.split(" "))      # [Ali, Valiyev]
-print(name.replace("Ali", "Hasan"))
-print(name.startswith("Ali"))  # True
-Lists
-velo
+```
+
+### Lists
+
+```python
 numbers = [1, 2, 3, 4, 5]
+
 numbers.append(6)
 numbers.insert(0, 0)
 numbers.remove(3)
 numbers.sort()
 numbers.reverse()
+
+print(numbers)
 print(len(numbers))
-Dicts
-velo
-user = {"name": "Ali", "age": 25}
-print(user["name"])              # Ali
-print(user.get("email", "N/A"))  # N/A
-print(user.keys())               # [name, age]
-print(user.values())             # [Ali, 25]
-User Input
-velo
+```
+
+### Dictionaries
+
+```python
+user = {
+    "name": "Ali",
+    "age": 25
+}
+
+print(user["name"])
+print(user.get("email", "N/A"))
+print(user.keys())
+print(user.values())
+```
+
+### String Manipulation
+
+```python
+name = "Ali Valiyev"
+
+print(name.upper())
+print(name.lower())
+print(name.replace("Ali", "Hasan"))
+print(name.split(" "))
+print(name.startswith("Ali"))
+```
+
+### User Input
+
+```python
 name = input("What is your name? ")
 print("Hello,", name, "!")
-Recursion
-velo
+```
+
+### Recursion
+
+```python
 def factorial(n):
     if n <= 1:
         return 1
+
     return n * factorial(n - 1)
 
-print(factorial(5))   # 120
-📚 Syntax Reference
-Variables
-velo
+print(factorial(5))
+```
+
+---
+
+## 📚 Language Reference
+
+### Variables
+
+Velo uses simple assignment syntax:
+
+```python
 x = 10
 pi = 3.14
 name = "Velo"
 is_ready = True
 nothing = None
-Operators
-Type	Operators
-Arithmetic	+, -, *, /, //, %, **
-Comparison	==, !=, <, >, <=, >=
-Logical	and, or, not
-Membership	in, not in
-Assignment	=, +=, -=, *=, /=
-Conditionals
-velo
-if x > 10:
-    print("big")
-elif x > 5:
-    print("medium")
-else:
-    print("small")
-Loops
-velo
-# for
-for i in range(10):
-    print(i)
+```
 
-# while
-i = 0
-while i < 10:
-    print(i)
-    i += 1
+### Operators
 
-# break / continue
-for i in range(10):
-    if i == 5:
-        break
-    if i % 2 == 0:
-        continue
-    print(i)
-Functions
-velo
+| Category | Operators |
+|---|---|
+| Arithmetic | `+`, `-`, `*`, `/`, `//`, `%`, `**` |
+| Comparison | `==`, `!=`, `<`, `>`, `<=`, `>=` |
+| Logical | `and`, `or`, `not` |
+| Membership | `in`, `not in` |
+| Assignment | `=`, `+=`, `-=`, `*=`, `/=` |
+
+### Functions and Lambda Expressions
+
+```python
 def add(a, b):
     return a + b
 
-def greet(name, greeting="Hello"):
-    return greeting + ", " + name
-
-# Lambda
 square = lambda x: x * x
-print(square(5))   # 25
-Built-in Functions (18)
-Function	Description
-print(x)	Print to console
-input(prompt)	Read user input
-len(x)	Length of list/string/dict
-str(x)	Convert to string
-int(x)	Convert to integer
-float(x)	Convert to float
-type(x)	Get type name
-range(n)	Generate range
-abs(x)	Absolute value
-min(x)	Minimum
-max(x)	Maximum
-sum(x)	Sum of list
-push(lst, x)	Add to list
-pop(lst)	Remove from list
-keys(d)	Dict keys
-values(d)	Dict values
-items(d)	Dict items
-append(lst, x)	Append to list
-String Methods (15)
-Method	Example
-.upper()	"hi".upper() → "HI"
-.lower()	"HI".lower() → "hi"
-.strip()	" x ".strip() → "x"
-.split(sep)	"a,b".split(",") → ["a", "b"]
-.replace(a, b)	"hi".replace("h", "H")
-.startswith(s)	"hi".startswith("h") → True
-.endswith(s)	"hi".endswith("i") → True
-.find(s)	"hi".find("i") → 1
-.count(s)	"aaa".count("a") → 3
-.capitalize()	"hi".capitalize() → "Hi"
-.title()	"hi there".title() → "Hi There"
-.join(list)	",".join(["a","b"]) → "a,b"
-.isdigit()	"123".isdigit() → True
-.isalpha()	"abc".isalpha() → True
-.isspace()	" ".isspace() → True
-List Methods (11)
-Method	Description
-.append(x)	Add element
-.pop(i)	Remove and return
-.insert(i, x)	Insert at index
-.remove(x)	Remove first match
-.index(x)	Find index
-.count(x)	Count occurrences
-.reverse()	Reverse in place
-.sort()	Sort in place
-.clear()	Remove all
-.copy()	Shallow copy
-.extend(lst)	Extend with list
-Dict Methods (7)
-Method	Description
-.keys()	Get keys
-.values()	Get values
-.items()	Get key-value pairs
-.get(key, default)	Get with default
-.pop(key)	Remove and return
-.clear()	Remove all
-.copy()	Shallow copy
-🏗 Architecture
-Velo is composed of two parts:
 
-1. vertox/ — The Virtual Machine
-The Vertox Engine is a stack-based bytecode VM. It's independent and can be used by other languages.
+print(add(10, 20))
+print(square(5))
+```
 
-opcode.hpp — Bytecode instructions (50+)
+### Loop Control
 
-value.hpp — Value system (int, float, str, list, dict, ...)
+```python
+for i in range(10):
+    if i == 5:
+        break
 
-env.hpp — Scope environment
+    if i % 2 == 0:
+        continue
 
-vm.hpp — VM interface
+    print(i)
+```
 
-vm.cpp — Execution core (800+ lines)
+---
 
-2. src/ — The Language
-The Velo language itself:
+## 🧰 Built-in Functions
 
-lexer.cpp — Text → Tokens
+Velo provides built-in functions for common programming tasks.
 
-parser.cpp — Tokens → AST
+| Function | Purpose |
+|---|---|
+| `print(x)` | Print values |
+| `input(prompt)` | Read user input |
+| `len(x)` | Get collection or string length |
+| `str(x)` | Convert a value to a string |
+| `int(x)` | Convert a value to an integer |
+| `float(x)` | Convert a value to a floating-point number |
+| `type(x)` | Get a type name |
+| `range(n)` | Generate a range |
+| `abs(x)` | Get the absolute value |
+| `min(x)` | Find the minimum |
+| `max(x)` | Find the maximum |
+| `sum(x)` | Calculate a sum |
+| `push(lst, x)` | Add an element to a list |
+| `pop(lst)` | Remove an element |
+| `keys(d)` | Get dictionary keys |
+| `values(d)` | Get dictionary values |
+| `items(d)` | Get dictionary entries |
+| `append(lst, x)` | Append an element |
 
-compiler.cpp — AST → Bytecode
+---
 
-velo.cpp — High-level API
+## 🔤 String Methods
 
-🗺 Roadmap
-v0.1 (current)
-✅ Basic syntax
+| Method | Purpose |
+|---|---|
+| `.upper()` | Convert to uppercase |
+| `.lower()` | Convert to lowercase |
+| `.strip()` | Remove surrounding whitespace |
+| `.split(sep)` | Split a string |
+| `.replace(a, b)` | Replace a substring |
+| `.startswith(s)` | Check the beginning |
+| `.endswith(s)` | Check the ending |
+| `.find(s)` | Find a substring |
+| `.count(s)` | Count occurrences |
+| `.capitalize()` | Capitalize the first character |
+| `.title()` | Capitalize words |
+| `.join(list)` | Join strings |
+| `.isdigit()` | Check for digits |
+| `.isalpha()` | Check for alphabetic characters |
+| `.isspace()` | Check for whitespace |
 
-✅ Functions, recursion
+Example:
 
-✅ Lists, dicts, strings
+```python
+text = "  hello velo  "
 
-✅ String/List/Dict methods
+print(text.strip().upper())
+print("a,b,c".split(","))
+print("velo".startswith("ve"))
+```
 
-✅ input()
+---
 
-✅ Linux AppImage
+## 📋 List Methods
 
-✅ Windows installer
+| Method | Purpose |
+|---|---|
+| `.append(x)` | Add an element |
+| `.pop(i)` | Remove and return an element |
+| `.insert(i, x)` | Insert at an index |
+| `.remove(x)` | Remove the first matching element |
+| `.index(x)` | Find an element's index |
+| `.count(x)` | Count matching elements |
+| `.reverse()` | Reverse the list |
+| `.sort()` | Sort the list |
+| `.clear()` | Remove all elements |
+| `.copy()` | Create a shallow copy |
+| `.extend(lst)` | Append elements from another list |
 
-v0.2 (planned)
-⏭ Classes (class)
+---
 
-⏭ Exception handling (try/except)
+## 🗂️ Dictionary Methods
 
-⏭ f-strings (f"Hello, {name}!")
+| Method | Purpose |
+|---|---|
+| `.keys()` | Return dictionary keys |
+| `.values()` | Return dictionary values |
+| `.items()` | Return key-value entries |
+| `.get(key, default)` | Retrieve a value with a fallback |
+| `.pop(key)` | Remove and return a value |
+| `.clear()` | Remove all entries |
+| `.copy()` | Create a shallow copy |
 
-⏭ Slicing (arr[1:3])
+---
 
-⏭ List comprehensions
+## 🏗️ Project Structure
 
-v0.3 (planned)
-⏭ import modules
+```text
+velo/
+├── src/
+│   ├── lexer.cpp       # Source code tokenization
+│   ├── parser.cpp      # Syntax parsing and AST
+│   ├── compiler.cpp    # AST-to-bytecode compilation
+│   └── velo.cpp        # High-level language API
+│
+├── vertox/
+│   ├── opcode.hpp      # Bytecode instruction definitions
+│   ├── value.hpp       # Runtime value system
+│   ├── env.hpp         # Scope and environment
+│   ├── vm.hpp          # Virtual machine interface
+│   └── vm.cpp          # Bytecode execution core
+│
+├── tests/              # Automated tests
+├── CMakeLists.txt      # Build configuration
+├── LICENSE             # Apache-2.0 license
+└── README.md
+```
 
-⏭ Standard library
+---
 
-⏭ Package manager
+## 🗺️ Roadmap
 
-v1.0 (future)
-⏭ JIT compiler
+Velo is an evolving project. The following roadmap describes planned development, not necessarily features already implemented.
 
-⏭ Full Python 3.x compatibility
+### `v0.1` — Foundation
 
-⏭ Real threading (no GIL)
+- [x] Basic language syntax
+- [x] Functions and recursion
+- [x] Lists and dictionaries
+- [x] String, list and dictionary methods
+- [x] User input
+- [ ] Continue improving tests and stability
 
-🤝 Contributing
-Contributions are welcome! Here's how:
+### `v0.2` — Language Expansion
 
-Fork the repository
+- [ ] Classes and object-oriented programming
+- [ ] Exception handling with `try` / `except`
+- [ ] Formatted strings (`f-strings`)
+- [ ] Slicing (`arr[1:3]`)
+- [ ] List comprehensions
 
-Create a feature branch:
+### `v0.3` — Ecosystem
 
-bash
+- [ ] Module imports
+- [ ] Standard library expansion
+- [ ] Package manager
+- [ ] Better developer tooling
+
+### `v1.0` — Performance and Stability
+
+- [ ] JIT compilation research and implementation
+- [ ] Broader Python-inspired language compatibility
+- [ ] Real threading and concurrency support
+- [ ] Stable runtime and documented language specification
+- [ ] Improved cross-platform distribution
+
+---
+
+## 🧪 Testing
+
+Build the project with debug settings:
+
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+cmake --build build
+```
+
+Run the test suite:
+
+```bash
+ctest --test-dir build --output-on-failure
+```
+
+The test suite should be expanded as new language features are introduced.
+
+---
+
+## 🤝 Contributing
+
+Contributions, bug reports and feature suggestions are welcome!
+
+### Contribution Workflow
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Implement and test your changes.
+4. Commit your work.
+5. Push your branch.
+6. Open a Pull Request.
+
+```bash
 git checkout -b feature/amazing-feature
-Commit your changes:
 
-bash
+git add .
 git commit -m "Add amazing feature"
-Push:
 
-bash
 git push origin feature/amazing-feature
-Open a Pull Request
+```
 
-Development Setup
-bash
+### Development Setup
+
+```bash
 git clone https://github.com/gnyyvvv/velo.git
 cd velo
-mkdir build && cd build
-cmake .. -DCMAKE_BUILD_TYPE=Debug
-make
-./velo --version
-Running Tests
-bash
-cd build
-ctest
-📄 License
-Apache License 2.0 — see LICENSE for details.
 
-📬 Contact
-GitHub: @gnyyvvv
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+cmake --build build
 
-Issues: github.com/gnyyvvv/velo/issues
+ctest --test-dir build --output-on-failure
+```
 
-Website: velo.uz (coming soon)
+Please include tests for new features and bug fixes whenever possible.
 
-⭐ Star History
-If Velo is useful to you, please give it a star ⭐ — it helps a lot!
+---
 
-<p align="center"> <strong>Made with ❤️ by <a href="https://github.com/gnyyvvv">gnyyvvv</a></strong><br> <em>Python-like syntax, C++-like speed.</em> </p> ```
+## 🔐 Security
+
+If you discover a security vulnerability, please report it privately to the project maintainer when a private reporting channel is available. Avoid publishing sensitive exploit details before a fix is available.
+
+---
+
+## 📄 License
+
+Velo is distributed under the **Apache License 2.0**.
+
+See the [`LICENSE`](LICENSE) file for the full license text.
+
+---
+
+## 🌐 Community
+
+- **GitHub Repository:** [gnyyvvv/velo](https://github.com/gnyyvvv/velo)
+- **Issues & Bug Reports:** [GitHub Issues](https://github.com/gnyyvvv/velo/issues)
+- **Website:** [velo.uz](https://velo.uz) *(coming soon)*
+
+If you find Velo interesting, consider giving the repository a ⭐ star and sharing your feedback.
+
+---
+
+<p align="center">
+  <b>⚡ Velo — Code simply. Build boldly.</b>
+  <br>
+  <sub>Made with ❤️ by gnyyvvv</sub>
+</p>
