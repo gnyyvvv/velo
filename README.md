@@ -32,7 +32,6 @@ text
 
 ### Linux (universal installer)
 
-```bash
 curl -sSL https://raw.githubusercontent.com/gnyyvvv/velo/main/install.sh | bash
 Then:
 
@@ -333,4 +332,4 @@ Website: velo.uz (coming soon)
 ⭐ Star History
 If Velo is useful to you, please give it a star ⭐ — it helps a lot!
 
-<p align="center"> <strong>Made with ❤️ by <a href="https://github.com/gnyyvvv">gnyyvvv</a></strong><br> <em>Python-like syntax, C++-like speed.</em> </p> ```
+<p align="center"> <strong>Made with ❤️ by <a href="https://github.com/gnyyvvv">gnyyvvv</a></strong><br> <em>Python-like syntax, C++-like speed.</em> </p>
