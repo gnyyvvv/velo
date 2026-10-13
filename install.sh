@@ -16,11 +16,12 @@ case $ARCH in
 esac
 
 VERSION="0.1"
-URL="https://github.com/gyyyvvv/velo/raw/main/Velo-${VERSION}-${ARCH_NAME}.AppImage"
+# ⭐ TO'G'RI USERNAME: gnyyvvv (3 ta y)
+URL="https://github.com/gnyyvvv/velo/raw/main/Velo-${VERSION}-${ARCH_NAME}.AppImage"
 
 TMP_FILE="/tmp/Velo-${VERSION}-${ARCH_NAME}.AppImage"
 
-echo "Yuklab olinmoqda..."
+echo "Yuklab olinmoqda: $URL"
 if command -v curl >/dev/null 2>&1; then
     curl -sSL -o "$TMP_FILE" "$URL"
 else
